@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: false
+
+  tasks:
+    - name: check if niminit exists
+      stat:
+        path: /opt/nimsoft/bin/niminit
+
+    - name: restart robot
+      command: /opt/nimsoft/bin/niminit restart
+      register: nimstat
+
+    - debug:
+        msg: "{{ nimstat }}"
